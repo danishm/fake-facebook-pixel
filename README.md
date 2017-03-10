@@ -14,15 +14,15 @@ Since the endpoint has to be served from `https`, you will need to generate a se
 
 The following instructions are based on macOS Sierra
 
-1) Open the "Keychain Access" application
-2) Keychain Access > Certificate Assistant > Create a Certificate...
-3) Assign Name as "www.facebook.com", Identity Type as "Self Signed Root", Certificate Type as "SSL Server"
-4) Click "Create", "Continue" and "Done" as required
-5) Find the newly created certificate in Keychain Access
-6) Double Click and select "Always Trust" under Trust > When using this certificate. Clost window
-7) Right Click on the certificate and select "Export ......"
-8) Save the .p12 file in the same folder as `server.py`
-9) Convert it to the .pem format using the command `openssl pkcs12 -in www.facebook.com.p12 -out www.facebook.com.pem -nodes`
+1. Open the "Keychain Access" application
+2. Keychain Access > Certificate Assistant > Create a Certificate...
+3. Assign Name as "www.facebook.com", Identity Type as "Self Signed Root", Certificate Type as "SSL Server"
+4. Click "Create", "Continue" and "Done" as required
+5. Find the newly created certificate in Keychain Access
+6. Double Click and select "Always Trust" under Trust > When using this certificate. Clost window
+7. Right Click on the certificate and select "Export ......"
+8. Save the .p12 file in the same folder as `server.py`
+9. Convert it to the .pem format using the command `openssl pkcs12 -in www.facebook.com.p12 -out www.facebook.com.pem -nodes`
 
 ### Modify You Hosts File
 
@@ -31,6 +31,10 @@ The following instructions are based on macOS Sierra
 Add `www.facebook.com` as an alias for `127.0.0.1`
 
 `127.0.0.1		localhost www.facebook.com`
+
+The reason why this works out is because the actual Facebook tag that implements the `fbq` function is loaded from `connect.facebook.net`, which is not in the hosts file. Hence, the plumbing loades succesfully. 
+
+The `https://www.facebook.com/tr/` endpoint is used for pinging the pixel, which we are intercepting and simply logging!
 
 ### Make Sure Port `80` is Open
 
