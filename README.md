@@ -51,3 +51,5 @@ On macOS Sierra, I had to make sure
 
 ### Start Debugging!
 
+Lauch the page you want to test debug and as it loades and pings the Facebook pixel, you will see the query and parameter details on the STDOUT from `server.py`
+
